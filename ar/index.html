@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="uk">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>AR: Сонячна система</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.css" />
-    <script src="../js/main.js"></script>
   </head>
-  <body style="margin: 0; overflow: hidden;">
-    <a-scene mindar-image="imageTargetSrc: mind/solar.mind;" embedded color-space="sRGB" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: true">
-      
-     <a-scene
-        mindar-image="imageTargetSrc: mind/solar.mind;"
-        embedded
-        color-space="sRGB"
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: true">
-      
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      
-        <a-entity mindar-image-target="targetIndex: 0">
-          <a-box color="red" depth="0.2" height="0.2" width="0.2" position="0 0 0"></a-box>
-        </a-entity>
-      
-      </a-scene>
+  <body style="margin: 0; overflow: hidden">
+    <a-scene
+      mindar-image="imageTargetSrc: mind/solar.mind;"
+      embedded
+      color-space="sRGB"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true"
+      renderer="colorManagement: true, physicallyCorrectLights"
+    >
+      <a-assets>
+        <img id="sun" src="../textures/sun.jpg" />
+        <img id="earth" src="../textures/earth.jpg" />
+      </a-assets>
 
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- Сонце -->
+        <a-sphere radius="0.5" src="#sun" position="0 0 0"></a-sphere>
+
+        <!-- Земля -->
+        <a-sphere radius="0.2" src="#earth" position="1 0 0">
+          <a-animation
+            attribute="rotation"
+            to="0 360 0"
+            dur="6000"
+            repeat="indefinite"
+          ></a-animation>
+        </a-sphere>
+      </a-entity>
     </a-scene>
   </body>
 </html>
