@@ -1,5 +1,4 @@
 AFRAME.registerComponent('main', {
-  schema: {},
   init: function () {
     this.start = Date.now();
     this.planets = [
@@ -15,7 +14,7 @@ AFRAME.registerComponent('main', {
   },
   tick: function () {
     const elapsed = (Date.now() - this.start) / 1000;
-    this.planets.forEach((planet) => {
+    this.planets.forEach(planet => {
       const angle = elapsed * planet.speed;
       const x = planet.radius * Math.cos(angle);
       const z = planet.radius * Math.sin(angle);
