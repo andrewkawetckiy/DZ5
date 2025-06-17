@@ -31,56 +31,56 @@
       <!-- Меркурій -->
       <a-sphere
         planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88"
-        radius="0.03"
+        radius="0.1"
         src="#mercuryTexture">
       </a-sphere>
 
       <!-- Венера -->
       <a-sphere
         planet="name: Venus; dist: 1.082e11; mass: 4.87e24; T: 225"
-        radius="0.09"
+        radius="0.2"
         src="#venusTexture">
       </a-sphere>
 
       <!-- Земля -->
       <a-sphere
         planet="name: Earth; dist: 1.496e11; mass: 5.972e24; T: 365"
-        radius="0.1"
+        radius="0.22"
         src="#earthTexture">
       </a-sphere>
 
       <!-- Марс -->
       <a-sphere
         planet="name: Mars; dist: 2.279e11; mass: 6.39e23; T: 687"
-        radius="0.08"
+        radius="0.15"
         src="#marsTexture">
       </a-sphere>
 
       <!-- Юпітер -->
       <a-sphere
         planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331"
-        radius="0.25"
+        radius="0.5"
         src="#jupiterTexture">
       </a-sphere>
 
       <!-- Сатурн -->
       <a-sphere
         planet="name: Saturn; dist: 1.433e12; mass: 5.683e26; T: 10747"
-        radius="0.22"
+        radius="0.45"
         src="#saturnTexture">
       </a-sphere>
 
       <!-- Уран -->
       <a-sphere
         planet="name: Uranus; dist: 2.877e12; mass: 8.681e25; T: 30589"
-        radius="0.18"
+        radius="0.3"
         src="#uranusTexture">
       </a-sphere>
 
       <!-- Нептун -->
       <a-sphere
         planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800"
-        radius="0.17"
+        radius="0.3"
         src="#neptuneTexture">
       </a-sphere>
 
@@ -102,7 +102,7 @@
     <!-- Скрипт JavaScript -->
     <script>
       const day = 24.0 * 60 * 60;
-      const DIST_SCALE = 1e10; // Зменшуємо масштаб відстаней у 10 мільярдів разів
+      const DIST_SCALE = 1e15; // Зменшуємо масштаб відстаней у 10 мільярдів разів
 
 
       AFRAME.registerComponent('planet', {
