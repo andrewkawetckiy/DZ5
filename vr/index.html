@@ -10,79 +10,33 @@
       <!-- Нічне небо -->
       <a-sky src="#skyTexture" rotation="0 -90 0"></a-sky>
 
-      <!-- Камера з навігацією -->
-      <a-entity position="0 1.6 5">
+      <!-- Камера -->
+      <a-entity position="0 2 20">
         <a-camera wasd-controls-enabled="true" look-controls="pointerLockEnabled: true"></a-camera>
       </a-entity>
 
       <!-- Освітлення -->
-      <a-entity light="type: point; intensity: 2; distance: 100" position="0 0 0"></a-entity>
+      <a-entity light="type: point; intensity: 2; distance: 1000" position="0 0 0"></a-entity>
       <a-entity light="type: ambient; intensity: 0.3"></a-entity>
 
       <!-- Сонце -->
       <a-sphere
         planet="name: Sun; dist: 0; mass: 1.989e30; T: 0"
-        radius="0.5"
+        radius="1"
         src="#sunTexture"
         position="0 0 0"
         material="emissive: yellow; emissiveIntensity: 1">
       </a-sphere>
 
-      <!-- Меркурій -->
-      <a-sphere
-        planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88"
-        radius="0.1"
-        src="#mercuryTexture">
-      </a-sphere>
-
-      <!-- Венера -->
-      <a-sphere
-        planet="name: Venus; dist: 1.082e11; mass: 4.87e24; T: 225"
-        radius="0.2"
-        src="#venusTexture">
-      </a-sphere>
-
-      <!-- Земля -->
-      <a-sphere
-        planet="name: Earth; dist: 1.496e11; mass: 5.972e24; T: 365"
-        radius="0.22"
-        src="#earthTexture">
-      </a-sphere>
-
-      <!-- Марс -->
-      <a-sphere
-        planet="name: Mars; dist: 2.279e11; mass: 6.39e23; T: 687"
-        radius="0.15"
-        src="#marsTexture">
-      </a-sphere>
-
-      <!-- Юпітер -->
-      <a-sphere
-        planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331"
-        radius="0.5"
-        src="#jupiterTexture">
-      </a-sphere>
-
-      <!-- Сатурн -->
-      <a-sphere
-        planet="name: Saturn; dist: 1.433e12; mass: 5.683e26; T: 10747"
-        radius="0.45"
-        src="#saturnTexture">
-      </a-sphere>
-
-      <!-- Уран -->
-      <a-sphere
-        planet="name: Uranus; dist: 2.877e12; mass: 8.681e25; T: 30589"
-        radius="0.3"
-        src="#uranusTexture">
-      </a-sphere>
-
-      <!-- Нептун -->
-      <a-sphere
-        planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800"
-        radius="0.3"
-        src="#neptuneTexture">
-      </a-sphere>
+      <!-- Планети -->
+      <a-sphere planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88" radius="0.1" src="#mercuryTexture"></a-sphere>
+      <a-sphere planet="name: Venus;   dist: 1.082e11; mass: 4.87e24; T: 225" radius="0.18" src="#venusTexture"></a-sphere>
+      <a-sphere planet="name: Earth;   dist: 1.496e11; mass: 5.972e24; T: 365" radius="0.2" src="#earthTexture"></a-sphere>
+      <a-sphere planet="name: Mars;    dist: 2.279e11; mass: 6.39e23; T: 687" radius="0.15" src="#marsTexture"></a-sphere>
+      <a-sphere planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331" radius="0.4" src="#jupiterTexture"></a-sphere>
+      <a-sphere planet="name: Saturn;  dist: 1.433e12; mass: 5.683e26; T: 10747" radius="0.35" src="#saturnTexture"></a-sphere>
+      <a-sphere planet="name: Uranus;  dist: 2.877e12; mass: 8.681e25; T: 30589" radius="0.3" src="#uranusTexture"></a-sphere>
+      <a-sphere planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800" radius="0.28" src="#neptuneTexture"></a-sphere>
 
       <!-- Текстури -->
       <a-assets>
@@ -101,10 +55,10 @@
 
     <!-- Скрипт JavaScript -->
     <script>
-      const day = 24.0 * 60 * 60;
-      const DIST_SCALE = 1e10; // Зменшуємо масштаб відстаней у 10 мільярдів разів
+      const day = 24.0 * 60 * 60; // сек в дні
+      const VISUAL_SCALE = 5e9;   // масштаб для відображення
 
-
+      // Компонент планети
       AFRAME.registerComponent('planet', {
         schema: {
           name: {type: 'string', default: ""},
@@ -118,12 +72,14 @@
         init: function () {
           this.data.T *= day;
           this.data.pos[0] = this.data.dist;
-          this.el.setAttribute('position', this.data.dist / DIST_SCALE + ' 0 0');
-          if (this.data.T != 0)
+          this.el.setAttribute('position', this.data.pos[0] / VISUAL_SCALE + ' 0 0');
+          if (this.data.T !== 0) {
             this.data.v[1] = 2 * Math.PI * this.data.dist / this.data.T;
+          }
         }
       });
 
+      // Компонент головного циклу
       AFRAME.registerComponent('main', {
         init: function () {
           this.solar_system = document.querySelectorAll('[planet]');
@@ -160,8 +116,8 @@
               planet_i.pos[k] += planet_i.v[k] * dt;
             }
 
-            el_i.setAttribute('position', `${planet_i.pos[0] / DIST_SCALE} ${planet_i.pos[1] / DIST_SCALE} ${planet_i.pos[2] / DIST_SCALE}`);
-
+            el_i.setAttribute('position',
+              `${planet_i.pos[0] / VISUAL_SCALE} ${planet_i.pos[1] / VISUAL_SCALE} ${planet_i.pos[2] / VISUAL_SCALE}`
             );
           }
         }
