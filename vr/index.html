@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>VR Сонячна система</title>
+    <title>VR Сонячна система (XY площина)</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   </head>
   <body>
@@ -10,8 +10,8 @@
       <!-- Нічне небо -->
       <a-sky src="#skyTexture" rotation="0 -90 0"></a-sky>
 
-      <!-- Камера з навігацією -->
-      <a-entity position="0 1.6 5">
+      <!-- Камера -->
+      <a-entity position="0 0 10">
         <a-camera wasd-controls-enabled="true" look-controls="pointerLockEnabled: true"></a-camera>
       </a-entity>
 
@@ -28,61 +28,15 @@
         material="emissive: yellow; emissiveIntensity: 1">
       </a-sphere>
 
-      <!-- Меркурій -->
-      <a-sphere
-        planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88"
-        radius="0.03"
-        src="#mercuryTexture">
-      </a-sphere>
-
-      <!-- Венера -->
-      <a-sphere
-        planet="name: Venus; dist: 1.082e11; mass: 4.87e24; T: 225"
-        radius="0.09"
-        src="#venusTexture">
-      </a-sphere>
-
-      <!-- Земля -->
-      <a-sphere
-        planet="name: Earth; dist: 1.496e11; mass: 5.972e24; T: 365"
-        radius="0.1"
-        src="#earthTexture">
-      </a-sphere>
-
-      <!-- Марс -->
-      <a-sphere
-        planet="name: Mars; dist: 2.279e11; mass: 6.39e23; T: 687"
-        radius="0.08"
-        src="#marsTexture">
-      </a-sphere>
-
-      <!-- Юпітер -->
-      <a-sphere
-        planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331"
-        radius="0.25"
-        src="#jupiterTexture">
-      </a-sphere>
-
-      <!-- Сатурн -->
-      <a-sphere
-        planet="name: Saturn; dist: 1.433e12; mass: 5.683e26; T: 10747"
-        radius="0.22"
-        src="#saturnTexture">
-      </a-sphere>
-
-      <!-- Уран -->
-      <a-sphere
-        planet="name: Uranus; dist: 2.877e12; mass: 8.681e25; T: 30589"
-        radius="0.18"
-        src="#uranusTexture">
-      </a-sphere>
-
-      <!-- Нептун -->
-      <a-sphere
-        planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800"
-        radius="0.17"
-        src="#neptuneTexture">
-      </a-sphere>
+      <!-- Планети -->
+      <a-sphere planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88" radius="0.03" src="#mercuryTexture"></a-sphere>
+      <a-sphere planet="name: Venus; dist: 1.082e11; mass: 4.87e24; T: 225" radius="0.09" src="#venusTexture"></a-sphere>
+      <a-sphere planet="name: Earth; dist: 1.496e11; mass: 5.972e24; T: 365" radius="0.1" src="#earthTexture"></a-sphere>
+      <a-sphere planet="name: Mars; dist: 2.279e11; mass: 6.39e23; T: 687" radius="0.08" src="#marsTexture"></a-sphere>
+      <a-sphere planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331" radius="0.25" src="#jupiterTexture"></a-sphere>
+      <a-sphere planet="name: Saturn; dist: 1.433e12; mass: 5.683e26; T: 10747" radius="0.22" src="#saturnTexture"></a-sphere>
+      <a-sphere planet="name: Uranus; dist: 2.877e12; mass: 8.681e25; T: 30589" radius="0.18" src="#uranusTexture"></a-sphere>
+      <a-sphere planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800" radius="0.17" src="#neptuneTexture"></a-sphere>
 
       <!-- Текстури -->
       <a-assets>
@@ -101,24 +55,30 @@
 
     <!-- Скрипт JavaScript -->
     <script>
-      const day = 24.0 * 60 * 60;
+      const day = 24 * 60 * 60;
 
       AFRAME.registerComponent('planet', {
         schema: {
-          name: {type: 'string', default: ""},
-          dist: {type: 'number', default: 0},
-          mass: {type: 'number', default: 0},
-          T: {type: 'number', default: 0},
-          v: {type: 'array', default: [0,0,0]},
-          a: {type: 'array', default: [0,0,0]},
-          pos: {type: 'array', default: [0,0,0]}
+          name: { type: 'string', default: "" },
+          dist: { type: 'number', default: 0 },
+          mass: { type: 'number', default: 0 },
+          T: { type: 'number', default: 0 },
+          v: { type: 'array', default: [0, 0, 0] },
+          a: { type: 'array', default: [0, 0, 0] },
+          pos: { type: 'array', default: [0, 0, 0] }
         },
         init: function () {
           this.data.T *= day;
-          this.data.pos[0] = this.data.dist;
-          this.el.setAttribute('position', this.data.dist / 1e9 + ' 0 0');
-          if (this.data.T != 0)
-            this.data.v[1] = 2 * Math.PI * this.data.dist / this.data.T;
+          this.data.pos[0] = this.data.dist; // X
+          this.data.pos[1] = 0;              // Y
+          this.data.pos[2] = 0;              // Z
+
+          if (this.data.T !== 0)
+            this.data.v[1] = 2 * Math.PI * this.data.dist / this.data.T; // швидкість по Y
+
+          this.el.setAttribute('position',
+            `${this.data.pos[0] / 1e9} ${this.data.pos[1] / 1e9} ${this.data.pos[2] / 1e9}`
+          );
         }
       });
 
