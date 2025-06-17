@@ -8,7 +8,8 @@
   <body>
     <a-scene background="color: black" main>
       <!-- Нічне небо -->
-      <a-sky src="#skyTexture" rotation="0 -90 0"></a-sky>
+      <a-sky src="#skyTexture" radius="1000" rotation="0 -90 0"></a-sky>
+
 
       <!-- Камера -->
       <a-entity position="0 2 20">
@@ -57,7 +58,7 @@
     <!-- Скрипт JavaScript -->
     <script>
       const day = 24.0 * 60 * 60; // сек в дні
-      const VISUAL_SCALE = 5e8;   // масштаб для відображення
+      const VISUAL_SCALE = 5e7;   // масштаб для відображення
 
       // Компонент планети
       AFRAME.registerComponent('planet', {
