@@ -7,12 +7,15 @@
   </head>
   <body>
     <a-scene background="color: black" main>
-      <!-- Камера з можливістю керування -->
+      <!-- Нічне небо -->
+      <a-sky src="#skyTexture" rotation="0 -90 0"></a-sky>
+
+      <!-- Камера з навігацією -->
       <a-entity position="0 1.6 5">
         <a-camera wasd-controls-enabled="true" look-controls="pointerLockEnabled: true"></a-camera>
       </a-entity>
 
-      <!-- Джерело світла -->
+      <!-- Освітлення -->
       <a-entity light="type: point; intensity: 2; distance: 100" position="0 0 0"></a-entity>
       <a-entity light="type: ambient; intensity: 0.3"></a-entity>
 
@@ -25,33 +28,81 @@
         material="emissive: yellow; emissiveIntensity: 1">
       </a-sphere>
 
+      <!-- Меркурій -->
+      <a-sphere
+        planet="name: Mercury; dist: 5.79e10; mass: 3.3e23; T: 88"
+        radius="0.03"
+        src="#mercuryTexture">
+      </a-sphere>
+
+      <!-- Венера -->
+      <a-sphere
+        planet="name: Venus; dist: 1.082e11; mass: 4.87e24; T: 225"
+        radius="0.09"
+        src="#venusTexture">
+      </a-sphere>
+
       <!-- Земля -->
       <a-sphere
         planet="name: Earth; dist: 1.496e11; mass: 5.972e24; T: 365"
         radius="0.1"
-        src="#earthTexture"
-        material="shader: standard">
+        src="#earthTexture">
       </a-sphere>
 
       <!-- Марс -->
       <a-sphere
         planet="name: Mars; dist: 2.279e11; mass: 6.39e23; T: 687"
         radius="0.08"
-        src="#marsTexture"
-        material="shader: standard">
+        src="#marsTexture">
+      </a-sphere>
+
+      <!-- Юпітер -->
+      <a-sphere
+        planet="name: Jupiter; dist: 7.785e11; mass: 1.898e27; T: 4331"
+        radius="0.25"
+        src="#jupiterTexture">
+      </a-sphere>
+
+      <!-- Сатурн -->
+      <a-sphere
+        planet="name: Saturn; dist: 1.433e12; mass: 5.683e26; T: 10747"
+        radius="0.22"
+        src="#saturnTexture">
+      </a-sphere>
+
+      <!-- Уран -->
+      <a-sphere
+        planet="name: Uranus; dist: 2.877e12; mass: 8.681e25; T: 30589"
+        radius="0.18"
+        src="#uranusTexture">
+      </a-sphere>
+
+      <!-- Нептун -->
+      <a-sphere
+        planet="name: Neptune; dist: 4.503e12; mass: 1.024e26; T: 59800"
+        radius="0.17"
+        src="#neptuneTexture">
       </a-sphere>
 
       <!-- Текстури -->
       <a-assets>
         <img id="sunTexture" src="textures/sun.jpg">
+        <img id="mercuryTexture" src="textures/mercury.jpg">
+        <img id="venusTexture" src="textures/venus.jpg">
         <img id="earthTexture" src="textures/earth.jpg">
         <img id="marsTexture" src="textures/mars.jpg">
+        <img id="jupiterTexture" src="textures/jupiter.jpg">
+        <img id="saturnTexture" src="textures/saturn.jpg">
+        <img id="uranusTexture" src="textures/uranus.jpg">
+        <img id="neptuneTexture" src="textures/neptune.jpg">
+        <img id="skyTexture" src="textures/night_sky.jpg">
       </a-assets>
     </a-scene>
 
-    <!-- Твій JS-код -->
+    <!-- Скрипт JavaScript -->
     <script>
-      const day = 24.0*60*60;
+      const day = 24.0 * 60 * 60;
+
       AFRAME.registerComponent('planet', {
         schema: {
           name: {type: 'string', default: ""},
@@ -82,12 +133,10 @@
           for (let i = 0; i < this.solar_system.length; i++) {
             let el_i = this.solar_system[i];
             let planet_i = el_i.components['planet'].data;
-
             planet_i.a = [0, 0, 0];
 
             for (let j = 0; j < this.solar_system.length; j++) {
               if (i === j) continue;
-
               let el_j = this.solar_system[j];
               let planet_j = el_j.components['planet'].data;
 
