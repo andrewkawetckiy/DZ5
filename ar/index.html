@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AR: Сонячна система</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.css" />
+  </head>
+  <body>
+    <a-scene mindar-image="imageTargetSrc: mind/solar.mind;" embedded color-space="sRGB" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: true">
+      
+      <a-assets>
+        <img id="sun" src="../textures/sun.jpg" />
+        <img id="mercury" src="../textures/mercury.jpg" />
+        <img id="venus" src="../textures/venus.jpg" />
+        <img id="earth" src="../textures/earth.jpg" />
+        <img id="mars" src="../textures/mars.jpg" />
+        <img id="jupiter" src="../textures/jupiter.jpg" />
+        <img id="saturn" src="../textures/saturn.jpg" />
+        <img id="uranus" src="../textures/uranus.jpg" />
+        <img id="neptune" src="../textures/neptune.jpg" />
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+
+        <!-- Сонце -->
+        <a-sphere radius="0.5" position="0 0 0" material="src: #sun"></a-sphere>
+
+        <!-- Планети -->
+        <a-sphere radius="0.1" position="0.8 0 0" material="src: #mercury"></a-sphere>
+        <a-sphere radius="0.12" position="1.2 0 0" material="src: #venus"></a-sphere>
+        <a-sphere radius="0.13" position="1.6 0 0" material="src: #earth"></a-sphere>
+        <a-sphere radius="0.12" position="2 0 0" material="src: #mars"></a-sphere>
+        <a-sphere radius="0.3" position="2.8 0 0" material="src: #jupiter"></a-sphere>
+        <a-sphere radius="0.28" position="3.5 0 0" material="src: #saturn"></a-sphere>
+        <a-sphere radius="0.25" position="4.2 0 0" material="src: #uranus"></a-sphere>
+        <a-sphere radius="0.24" position="5 0 0" material="src: #neptune"></a-sphere>
+
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

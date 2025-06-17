@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Сонячна система у VR</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: black">
+      <a-assets>
+        <img id="sun" src="../textures/sun.jpg" />
+        <img id="mercury" src="../textures/mercury.jpg" />
+        <img id="venus" src="../textures/venus.jpg" />
+        <img id="earth" src="../textures/earth.jpg" />
+        <img id="mars" src="../textures/mars.jpg" />
+        <img id="jupiter" src="../textures/jupiter.jpg" />
+        <img id="saturn" src="../textures/saturn.jpg" />
+        <img id="uranus" src="../textures/uranus.jpg" />
+        <img id="neptune" src="../textures/neptune.jpg" />
+      </a-assets>
+
+      <a-camera position="0 0 100"></a-camera>
+
+      <!-- Сонце -->
+      <a-entity geometry="primitive: sphere; radius: 10"
+                material="src: #sun"
+                position="0 0 0">
+      </a-entity>
+
+      <!-- Планети -->
+      <a-entity id="mercury" geometry="primitive: sphere; radius: 0.8" material="src: #mercury" position="15 0 0" rotation="0 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 8000">
+      </a-entity>
+
+      <a-entity id="venus" geometry="primitive: sphere; radius: 1.2" material="src: #venus" position="20 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+      </a-entity>
+
+      <a-entity id="earth" geometry="primitive: sphere; radius: 1.4" material="src: #earth" position="27 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 12000">
+      </a-entity>
+
+      <a-entity id="mars" geometry="primitive: sphere; radius: 1.1" material="src: #mars" position="34 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 15000">
+      </a-entity>
+
+      <a-entity id="jupiter" geometry="primitive: sphere; radius: 3.5" material="src: #jupiter" position="45 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 20000">
+      </a-entity>
+
+      <a-entity id="saturn" geometry="primitive: sphere; radius: 3" material="src: #saturn" position="58 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 24000">
+      </a-entity>
+
+      <a-entity id="uranus" geometry="primitive: sphere; radius: 2.5" material="src: #uranus" position="70 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 28000">
+      </a-entity>
+
+      <a-entity id="neptune" geometry="primitive: sphere; radius: 2.4" material="src: #neptune" position="80 0 0"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 30000">
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
