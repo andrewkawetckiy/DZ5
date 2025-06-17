@@ -4,39 +4,31 @@
     <meta charset="utf-8" />
     <title>AR: Сонячна система</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mind-ar@1.1.7/dist/aframe/mindar.css" />
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   </head>
-  <body style="margin: 0; overflow: hidden">
+  <body style="margin: 0; overflow: hidden;">
     <a-scene
-      mindar-image="imageTargetSrc: mind/solar.mind;"
       embedded
-      color-space="sRGB"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: true"
-      renderer="colorManagement: true, physicallyCorrectLights"
-    >
-      <a-assets>
-        <img id="sun" src="../textures/sun.jpg" />
-        <img id="earth" src="../textures/earth.jpg" />
-      </a-assets>
+      arjs="sourceType: webcam; debugUIEnabled: false;">
 
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <!-- Камера -->
+      <a-entity camera></a-entity>
 
-      <a-entity mindar-image-target="targetIndex: 0">
+      <!-- МАРКЕР (hiro) -->
+      <a-marker preset="hiro">
         <!-- Сонце -->
-        <a-sphere radius="0.5" src="#sun" position="0 0 0"></a-sphere>
+        <a-sphere radius="0.5" src="../textures/sun.jpg" position="0 0 0"></a-sphere>
 
-        <!-- Земля -->
-        <a-sphere radius="0.2" src="#earth" position="1 0 0">
-          <a-animation
-            attribute="rotation"
-            to="0 360 0"
-            dur="6000"
-            repeat="indefinite"
-          ></a-animation>
-        </a-sphere>
-      </a-entity>
+        <!-- Планети (по колу, фіксовані позиції) -->
+        <a-sphere radius="0.05" src="../textures/mercury.jpg" position="0.8 0 0"></a-sphere>
+        <a-sphere radius="0.07" src="../textures/venus.jpg" position="1.2 0 0"></a-sphere>
+        <a-sphere radius="0.08" src="../textures/earth.jpg" position="1.6 0 0"></a-sphere>
+        <a-sphere radius="0.07" src="../textures/mars.jpg" position="2.0 0 0"></a-sphere>
+        <a-sphere radius="0.18" src="../textures/jupiter.jpg" position="2.8 0 0"></a-sphere>
+        <a-sphere radius="0.16" src="../textures/saturn.jpg" position="3.5 0 0"></a-sphere>
+        <a-sphere radius="0.14" src="../textures/uranus.jpg" position="4.2 0 0"></a-sphere>
+        <a-sphere radius="0.13" src="../textures/neptune.jpg" position="5.0 0 0"></a-sphere>
+      </a-marker>
     </a-scene>
   </body>
 </html>
