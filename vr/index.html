@@ -2,7 +2,7 @@
 <html lang="uk">
   <head>
     <meta charset="utf-8" />
-    <title>Сонячна система у VR</title>
+    <title>VR: Сонячна система</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="../js/main.js"></script>
   </head>
@@ -22,10 +22,9 @@
 
       <a-camera position="0 30 180"></a-camera>
 
-      <!-- Сонце -->
       <a-sphere radius="10" src="#sun" position="0 0 0"></a-sphere>
 
-      <!-- Планети (без позицій — керує скрипт) -->
+      <!-- Планети (позиції встановлюються у main.js) -->
       <a-sphere id="mercury" radius="0.8" src="#mercury"></a-sphere>
       <a-sphere id="venus" radius="1.2" src="#venus"></a-sphere>
       <a-sphere id="earth" radius="1.4" src="#earth"></a-sphere>
@@ -35,7 +34,6 @@
       <a-sphere id="uranus" radius="2.5" src="#uranus"></a-sphere>
       <a-sphere id="neptune" radius="2.4" src="#neptune"></a-sphere>
 
-      <!-- Скрипт обертання -->
       <a-entity main></a-entity>
     </a-scene>
   </body>
