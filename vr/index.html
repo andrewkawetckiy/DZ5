@@ -102,6 +102,8 @@
     <!-- Скрипт JavaScript -->
     <script>
       const day = 24.0 * 60 * 60;
+      const DIST_SCALE = 1e10; // Зменшуємо масштаб відстаней у 10 мільярдів разів
+
 
       AFRAME.registerComponent('planet', {
         schema: {
@@ -116,7 +118,7 @@
         init: function () {
           this.data.T *= day;
           this.data.pos[0] = this.data.dist;
-          this.el.setAttribute('position', this.data.dist / 1e9 + ' 0 0');
+          this.el.setAttribute('position', this.data.dist / DIST_SCALE + ' 0 0');
           if (this.data.T != 0)
             this.data.v[1] = 2 * Math.PI * this.data.dist / this.data.T;
         }
@@ -158,8 +160,8 @@
               planet_i.pos[k] += planet_i.v[k] * dt;
             }
 
-            el_i.setAttribute('position',
-              `${planet_i.pos[0] / 1e9} ${planet_i.pos[1] / 1e9} ${planet_i.pos[2] / 1e9}`
+            el_i.setAttribute('position', `${planet_i.pos[0] / DIST_SCALE} ${planet_i.pos[1] / DIST_SCALE} ${planet_i.pos[2] / DIST_SCALE}`);
+
             );
           }
         }
