@@ -2,73 +2,32 @@
 <html lang="uk">
   <head>
     <meta charset="utf-8" />
-    <title>AR: Сонячна система</title>
+    <title>AR: Сонячна система (власний маркер)</title>
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <style>
-      html, body { margin: 0; overflow: hidden; background: black; }
-      a-scene { width: 100vw; height: 100vh; }
-    </style>
   </head>
-  <body>
+  <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-
-      <!-- Освітлення -->
       <a-light type="ambient" intensity="1" color="#ffffff"></a-light>
       <a-light type="directional" intensity="0.6" position="1 1 0"></a-light>
-
-      <!-- Камера -->
-      <a-entity camera></a-entity>
-
-      <!-- Власний маркер -->
       <a-marker type="pattern" url="markers/NP.patt">
         <a-entity rotation="-90 0 0">
           <!-- Сонце -->
           <a-sphere radius="0.5" src="../textures/sun.jpg" position="0 0 0"></a-sphere>
-
-          <!-- Планети (без position) -->
-          <a-sphere id="mercury" radius="0.05" src="../textures/mercury.jpg"></a-sphere>
-          <a-sphere id="venus" radius="0.07" src="../textures/venus.jpg"></a-sphere>
-          <a-sphere id="earth" radius="0.08" src="../textures/earth.jpg"></a-sphere>
-          <a-sphere id="mars" radius="0.07" src="../textures/mars.jpg"></a-sphere>
-          <a-sphere id="jupiter" radius="0.18" src="../textures/jupiter.jpg"></a-sphere>
-          <a-sphere id="saturn" radius="0.16" src="../textures/saturn.jpg"></a-sphere>
-          <a-sphere id="uranus" radius="0.14" src="../textures/uranus.jpg"></a-sphere>
-          <a-sphere id="neptune" radius="0.13" src="../textures/neptune.jpg"></a-sphere>
-
-          <!-- JS контролер -->
-          <a-entity id="controller" planet-controller></a-entity>
+      
+          <!-- Планети -->
+          <a-sphere radius="0.05" src="../textures/mercury.jpg" position="0.8 0 0"></a-sphere>
+          <a-sphere radius="0.07" src="../textures/venus.jpg" position="1.2 0 0"></a-sphere>
+          <a-sphere radius="0.08" src="../textures/earth.jpg" position="1.6 0 0"></a-sphere>
+          <a-sphere radius="0.07" src="../textures/mars.jpg" position="2.0 0 0"></a-sphere>
+          <a-sphere radius="0.18" src="../textures/jupiter.jpg" position="2.8 0 0"></a-sphere>
+          <a-sphere radius="0.16" src="../textures/saturn.jpg" position="3.5 0 0"></a-sphere>
+          <a-sphere radius="0.14" src="../textures/uranus.jpg" position="4.2 0 0"></a-sphere>
+          <a-sphere radius="0.13" src="../textures/neptune.jpg" position="5.0 0 0"></a-sphere>
         </a-entity>
       </a-marker>
-    </a-scene>
 
-    <!-- ВШИТИЙ СКРИПТ -->
-    <script>
-      AFRAME.registerComponent('planet-controller', {
-        init: function () {
-          this.start = Date.now();
-          this.planets = [
-            { id: 'mercury', radius: 0.8, speed: 0.02 },
-            { id: 'venus', radius: 1.2, speed: 0.015 },
-            { id: 'earth', radius: 1.6, speed: 0.01 },
-            { id: 'mars', radius: 2.0, speed: 0.008 },
-            { id: 'jupiter', radius: 2.8, speed: 0.005 },
-            { id: 'saturn', radius: 3.5, speed: 0.004 },
-            { id: 'uranus', radius: 4.2, speed: 0.003 },
-            { id: 'neptune', radius: 5.0, speed: 0.0025 }
-          ];
-        },
-        tick: function () {
-          const elapsed = (Date.now() - this.start) / 1000;
-          this.planets.forEach(p => {
-            const angle = elapsed * p.speed;
-            const x = p.radius * Math.cos(angle);
-            const z = p.radius * Math.sin(angle);
-            const el = document.querySelector(`#${p.id}`);
-            if (el) el.setAttribute('position', `${x} 0 ${z}`);
-          });
-        }
-      });
-    </script>
+      <a-entity camera></a-entity>
+    </a-scene>
   </body>
 </html>
