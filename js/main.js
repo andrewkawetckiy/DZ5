@@ -13,7 +13,7 @@ AFRAME.registerComponent('main', {
       { id: 'neptune', radius: 80, speed: 0.0025 }
     ];
   },
-  tick: function (time, timeDelta) {
+  tick: function () {
     const elapsed = (Date.now() - this.start) / 1000;
     this.planets.forEach((planet) => {
       const angle = elapsed * planet.speed;
